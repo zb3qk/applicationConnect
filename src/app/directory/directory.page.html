@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ directory.directoryName }}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button color="danger"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+<div class="container">
+  <h2 class="display-2">Directories:</h2>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-card *ngFor="let direct of directory.directories" style="list-style: none; text-align: center;" > <!-- Get days variable from json in view.py (from Django) Interoperability between VueJS and Django -->
+        <div button [routerLink]="['/directory', direct.id]">
+        <ion-card-header>
+          	<ion-card-title> {{ direct.name }} </ion-card-title>
+      	</ion-card-header>
+          <ion-icon ios="ios-heart" md="md-heart" size="large"></ion-icon>
+          <p>{{ direct.id }}</p>
+          <!-- <a (click)="toDirectory(direct.id)">go to the directory!</a> -->
+        </div>
+      </ion-card>
+    </ion-row>
+  </ion-grid>
+</div>
+
+
+<div class="container">
+  <h2 class="display-2">Files:</h2>
+    <ion-grid>
+      <ion-row>
+        <ion-col size-lg="3" size-xs="12" size-md="4" size-sm="6" class="directory-element" *ngFor="let file of directory.files" style="list-style: none;">
+        	<ion-item button [routerLink]="['/details', file.id]">
+            <h4> {{file.name}} </h4>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+</div>
+
+</ion-content>

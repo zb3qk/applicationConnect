@@ -1,0 +1,37 @@
+<style type="text/css">
+	ion-header {
+	  background-color: black;
+	}
+
+	ion-title {
+		color: white;
+	}
+</style>
+
+<ion-header>
+<!--   <ion-toolbar> -->
+	<ion-grid>
+		<ion-row>
+		    <ion-button> Hallo </ion-button>
+		    <ion-title>{{ doot.file_name }}</ion-title>
+		</ion-row>
+	</ion-grid>
+    <ion-buttons>
+	  	<!-- <ion-back-button color="danger"></ion-back-button> -->
+    </ion-buttons>
+<!--   </ion-toolbar> -->
+</ion-header>
+
+<ion-button (click)="showImage()"> Hallo </ion-button>
+
+<ion-content textcenter class="vertical-align-content" >
+	<!-- <img class="" src="http://192.168.1.167:8000/request/{{id}}/"> -->
+	<!-- <div [innerHTML]="injectedHtml"></div> -->
+
+	<div [innerHTML]="doot.html"></div>
+	
+</ion-content>
+
+<!-- <ion-button color="danger" (click)="highlightCode($event)"> Highlight </ion-button>
+
+<ion-button color="warning" (click)="download($event)"> Download </ion-button> -->
