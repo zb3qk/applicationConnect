@@ -12,6 +12,10 @@ export interface Config {
 	files:  Array<{name: string, id: number}>;
 }
 
+export interface token {
+  access_token: string;
+}
+
 @Component({
   selector: 'app-direct',
   templateUrl: './direct.component.html',
@@ -31,13 +35,21 @@ export class DirectComponent implements OnInit {
 	  searchTerm: string = '';
 	  directoryName: string = '';
 
+    curToken = {
+      access_token: ''
+    }
+
   constructor(private getInfoService: GetInfoService ) { }
 
   ngOnInit() {
-    this.getInfoService.queryDjango(0).subscribe((res: Config) => {
+    this.getInfoService.getToken().subscribe((res: token) => {
       console.log(res);
-      this.directory = res;
+      this.curToken = res;
     });
+    // this.getInfoService.queryDjango(0).subscribe((res: Config) => {
+    //   console.log(res);
+    //   this.directory = res;
+    // });
   }
 
   searchChanged() {
