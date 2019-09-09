@@ -12,10 +12,15 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
 
+
 export interface data {
   html: string;
   file_id: number;
   file_name:string;
+}
+
+export interface token {
+  access_token: string;
 }
 
 @Component({
@@ -32,28 +37,45 @@ export class DetailsPage implements OnInit {
     'file_name': '',
     'html': "",
   };
+
 	id = 0;
   type = "";
   htmlStr: string = '';
 
+  curToken = {
+    access_token: ''
+  }
+  token = ''
+
   constructor(private route: ActivatedRoute, private getDisplayService: GetDisplayService, 
-    private statusBar: StatusBar, private photoViewer: PhotoViewer) { }
+    private statusBar: StatusBar, private photoViewer: PhotoViewer, ) { }
   //private photoViewer: PhotoViewer
 
   //private transfer: FileTransfer, private file: File
 
   ngOnInit() {
-
-    this.statusBar.overlaysWebView(false);
-  	this.route.params.subscribe(params => {
-      console.log(params) //log the entire params object
-      console.log(params['id']) //log the value of id 
-      this.id = params['id'];
-      this.type = "image";
-      this.getDisplayService.getDisplay(this.id).subscribe((res:data) => {
-        this.doot = res;
-      });
+    this.route.params.subscribe(params => {
+      this.getDisplayService.getToken().subscribe((res:token) => {
+        console.log(res);
+            boop(token['access_token']);
+            this.curToken = res;
+            this.token = this.curToken['access_token'];
+        });
+        console.log(params) //log the entire params object
+        console.log(params['id']) //log the value of id 
+        this.id = params['id'];
+        this.type = "image";
     });
+   //  this.statusBar.overlaysWebView(false);
+  	// this.route.params.subscribe(params => {
+   //    console.log(params) //log the entire params object
+   //    console.log(params['id']) //log the value of id 
+   //    this.id = params['id'];
+   //    this.type = "image";
+   //    this.getDisplayService.getDisplay(this.id).subscribe((res:data) => {
+   //      this.doot = res;
+   //    });
+   //  });
     console.log("displaying...");
     // this.getDisplayService.getDisplay(this.id).subscribe((res:data) => {
     //   console.log(res);
@@ -86,6 +108,8 @@ export class DetailsPage implements OnInit {
   	// const fileTransfer: FileTransferObject = this.transfer.create();
   	// fileTransfer.download("http://192.168.1.167:8000/request/"+this.id, this.file.externalRootDirectory + "boop");
   }
+
+
 
   ngOnDestroy() {
     // this.routeSub.unsubscribe();

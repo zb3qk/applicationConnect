@@ -45,7 +45,12 @@ export class DirectComponent implements OnInit {
     this.getInfoService.getToken().subscribe((res: token) => {
       console.log(res);
       this.curToken = res;
+      this.getInfoService.queryDjango(0).subscribe((res: Config) => {
+        console.log(res);
+        this.directory = res;
+      });
     });
+
     // this.getInfoService.queryDjango(0).subscribe((res: Config) => {
     //   console.log(res);
     //   this.directory = res;
@@ -53,11 +58,11 @@ export class DirectComponent implements OnInit {
   }
 
   searchChanged() {
-  	console.log("searchChanged");
-  	this.getInfoService.queryDjango(this.searchTerm).subscribe((res: Config) => {
-  		console.log(res);
-  		this.directory = res;
-  	});
+  	// console.log("searchChanged");
+  	// this.getInfoService.queryDjango(this.searchTerm).subscribe((res: Config) => {
+  	// 	console.log(res);
+  	// 	this.directory = res;
+  	// });
   }
 
 }

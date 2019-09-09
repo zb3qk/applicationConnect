@@ -9,6 +9,10 @@ export interface Config {
   files:  Array<{name: string, id: number}>;
 }
 
+export interface token {
+  access_token: string;
+}
+
 @Component({
   selector: 'app-directory',
   templateUrl: './directory.page.html',
@@ -23,6 +27,10 @@ export class DirectoryPage implements OnInit {
 	  };
 	  directoryName: string = '';
     id = 0;
+    
+    curToken = {
+      access_token: ''
+    }
 
   constructor( private route: ActivatedRoute , private getInfoService: GetInfoService) {  }
 
@@ -31,28 +39,40 @@ export class DirectoryPage implements OnInit {
       console.log("printer");
       console.log(params['id']); //log the value of id 
       this.id = params['id'];
-      this.getInfoService.queryDjango(this.id).subscribe((res: Config) => { //Get data
-        console.log(res);
-        this.directory = res;
-      }); 
+      this.getInfoService.getToken().subscribe((res: token) => {
+      console.log(res);
+      this.curToken = res;
+        this.getInfoService.queryDjango(this.id, this.curToken).subscribe((res: Config) => { //Get data
+          console.log(res);
+          this.directory = res;
+        }); 
+      });
     });
 
 
   }
 
 	toDirectory(id){
-      this.getInfoService.queryDjango(id).subscribe((res: Config) => {
-      console.log(id);
-      console.log("onClick()");
+      this.getInfoService.getToken().subscribe((res: token) => {
       console.log(res);
-      this.directory = res;
+      this.curToken = res;
+        this.getInfoService.queryDjango(id, this.curToken).subscribe((res: Config) => {
+        console.log(id);
+        console.log("onClick()");
+        console.log(res);
+        this.directory = res;
+      });
     });
   }
 
 	toFile(id){
-      this.getInfoService.queryDjango(id).subscribe((res: Config) => {
+    this.getInfoService.getToken().subscribe((res: token) => {
       console.log(res);
-      this.directory = res;
+      this.curToken = res;
+        this.getInfoService.queryDjango(id, this.curToken).subscribe((res: Config) => {
+        console.log(res);
+        this.directory = res;
+      });
     });
   }
 

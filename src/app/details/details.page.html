@@ -9,26 +9,31 @@
 </style>
 
 <ion-header>
-<!--   <ion-toolbar> -->
-	<ion-grid>
+  <ion-toolbar>
+<!-- 	<ion-grid>
 		<ion-row>
 		    <ion-button> Hallo </ion-button>
 		    <ion-title>{{ doot.file_name }}</ion-title>
 		</ion-row>
-	</ion-grid>
+	</ion-grid> -->
     <ion-buttons>
-	  	<!-- <ion-back-button color="danger"></ion-back-button> -->
+	  	<ion-back-button color="danger"></ion-back-button>
     </ion-buttons>
-<!--   </ion-toolbar> -->
+  </ion-toolbar>
 </ion-header>
 
-<ion-button (click)="showImage()"> Hallo </ion-button>
+<!-- <ion-button (click)="showImage()"> Hallo </ion-button> -->
+
+<script type="text/javascript">
+
+</script>
 
 <ion-content textcenter class="vertical-align-content" >
 	<!-- <img class="" src="http://192.168.1.167:8000/request/{{id}}/"> -->
 	<!-- <div [innerHTML]="injectedHtml"></div> -->
 
-	<div [innerHTML]="doot.html"></div>
+	<!-- <div [innerHTML]="doot.html"></div> -->
+	<img class ="display_image asyncImage" src="http://128.143.34.25:8000/getFileApi/{{id}}/jpg/">
 	
 </ion-content>
 

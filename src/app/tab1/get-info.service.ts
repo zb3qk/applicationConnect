@@ -60,12 +60,17 @@ export class GetInfoService {
 
   queryDjango(id) { //id = 4122
     // this.getToken();
-  	console.log("queryDjango");
-  	id = 4096;
-  	console.log(`${this.url}/request/directoryRequest/${id}/`);
+  	console.log("queryDjangoTab1");
+  	id = 4572;
+  	// console.log(`${this.url}/request/directoryRequest/${id}/`);
   	// console.log(this.http.get(`${this.url}/request/directoryRequest/${id}/`));
-  	
-    return this.http.get(`${this.url}/request/directoryRequest/${id}/`);
+    // const token = tokenJson.access_token;
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     `Authorization': 'Bearer ${token}`,
+    //   })
+    // };
+    return this.http.get(`${this.url}/getDirectory/${id}/`);
   	// return this.directory;
   }
 }
